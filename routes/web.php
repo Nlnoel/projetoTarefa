@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get("/", function(){
+
 });
+Route::prefix("Login")->group(function(){
+    Route::get("/", ["as" => "Login", "uses" => "App\Http\Controllers\Api\LoginController@index"]);
+    Route::post("Autenticar", ["as" => "Autenticar", "uses" => "App\Http\Controllers\Api\LoginController@login"]);
+    Route::post("sair", ["as" => "Autenticar", "uses" => "App\Http\Controllers\Api\LoginController@login"]);
+    Route::get("Validar", ["as" => "ValidaLogin", "uses" => "App\Http\Controllers\Api\LoginController@autenticacao"]);
+});
+
+Route::get("/", ["as" => "Home", "uses" => "App\Http\Controllers\Web\PrincipalController@index"]);
+
+//Route::any("Usuarios", ["as" => "ListaUsuarios", "uses" => "App\Http\Controllers\ListaUsuarios@index"]);
